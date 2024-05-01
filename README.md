@@ -1,16 +1,16 @@
-**Credit Card Transaction Fraud Detection**
+<h1 align="center">Credit Card Transaction Fraud Detection</h1>
 
 ![Intro Img](Image/CCF_wall.png)
 
-**0.1 Problem Statement**
+## 0.1 Problem Statement ❓
 
 Fraud detection is a set of activities undertaken to prevent money or property from being obtained through false pretenses. Fraud detection is applied to many industries such as banking or insurance. In banking, fraud may include forging checks or using stolen credit cards. Other forms of fraud may involve exaggerating losses or causing an accident with the sole intent for the pay-out. With an unlimited and rising number of ways someone can commit fraud, detection can be difficult to accomplish. Fraud detection is a critical issue for retailers determined to prevent losses and preserve customer trust. Design and code a solution using python and machine learning techniques to classify fraudless and fraud credit card transactions.
 
-**Solution**
+## Solution 🎯
 
 Our process will start with Exploratory Data Analysis (EDA) with a goal to gain better insight about our data set and eventually develop a model using machine learning methodology.
 
-1. **Exploratory Data Analysis**
+## 1. Exploratory Data Analysis
 
 I have obtained the data set and now it is time to perform an Exploratory data Analysis (EDA) to gain insight about the dataset and prepare the data for modeling purposes.
 
@@ -42,7 +42,7 @@ The following diagram shows the distribution of gender based on wheather the tra
 
 **Figure 2.** Distribution of Gender in the Dataset
 
-2 **Data Preprocessing and Data Cleaning**
+## 2 Data Preprocessing and Data Cleaning
 
 **2.1 Data Preprocessing**
 In this phase of the process I acomplish 3 major things listed below: 
