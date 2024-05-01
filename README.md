@@ -198,9 +198,8 @@ PyCaret was supposed to help me identify the best fit model by training multiple
   
 **3.1.5. K-Neighbors Classification Model (Best Fit Model)**
 
-![KNC Report](Image/cf_mtrx_Knc.png)
-
 ![KNC Report](Image/KNC_cr.png)
+![KNC Report](Image/cf_mtrx_Knc.png)
 
 **Figure 10.** Classification Report for K-Neighbors Classification Model
 
