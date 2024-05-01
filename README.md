@@ -1,4 +1,5 @@
 **Credit Card Transaction Fraud Detection**
+
 ![Intro Img](Image/CCF_wall.png)
 
 **0.1 Problem Statement**
@@ -17,10 +18,10 @@ I have obtained the data set and now it is time to perform an Exploratory data A
 
 **fraudTrain.csv** is a simulated credit card transaction dataset containing legitimate and fraud transactions from the duration 1st Jan 2019 - 31st Dec 2020. It covers credit cards of 1000 customers doing transactions with a pool of 800 merchants.
 
-**1.2 Observation**
+**1.2 Initial Observation**
 
 - The dataset contains 1296675 observation
-- The Data set contains nor null values neither duplicate values
+- The Data set contains no null values neither duplicate values
 - The dataset contains a total of 23 columns out of which we have a single dependent variable labeled is_fraud
 - The is_fraud feature contains two categories 0 and 1, which represent honest and fraud transactions respectively
 
@@ -28,7 +29,8 @@ I have obtained the data set and now it is time to perform an Exploratory data A
 
 **1.3.1 Distribution of Gender**
 
-The following diagram shows the distribution of gender where F represents female while M represents male
+The following diagram shows the distribution of gender based on wheather the transaction was fradulent or not where F represents female while M represents male
+
 ![Gender Distribution](Image/Gender_dis.png)
 
 **Figure 1.** Distribution of Gender in the Dataset
