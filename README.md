@@ -1,4 +1,5 @@
 **Credit Card Transaction Fraud Detection**
+![Intro Img](Image/CCF_wall.png)
 
 **0.1 Problem Statement**
 
