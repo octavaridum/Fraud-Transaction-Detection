@@ -1,14 +1,16 @@
-**Credit Card Transaction Fraud Detection**
+<h1 align="center">Credit Card Transaction Fraud Detection</h1>
 
-**0.1 Problem Statement**
+![Intro Img](Image/CCF_wall.png)
+
+## 0.1 Problem Statement ❓
 
 Fraud detection is a set of activities undertaken to prevent money or property from being obtained through false pretenses. Fraud detection is applied to many industries such as banking or insurance. In banking, fraud may include forging checks or using stolen credit cards. Other forms of fraud may involve exaggerating losses or causing an accident with the sole intent for the pay-out. With an unlimited and rising number of ways someone can commit fraud, detection can be difficult to accomplish. Fraud detection is a critical issue for retailers determined to prevent losses and preserve customer trust. Design and code a solution using python and machine learning techniques to classify fraudless and fraud credit card transactions.
 
-**Solution**
+## Solution 🎯
 
 Our process will start with Exploratory Data Analysis (EDA) with a goal to gain better insight about our data set and eventually develop a model using machine learning methodology.
 
-1. **Exploratory Data Analysis**
+## 1. Exploratory Data Analysis
 
 I have obtained the data set and now it is time to perform an Exploratory data Analysis (EDA) to gain insight about the dataset and prepare the data for modeling purposes.
 
@@ -16,46 +18,73 @@ I have obtained the data set and now it is time to perform an Exploratory data A
 
 **fraudTrain.csv** is a simulated credit card transaction dataset containing legitimate and fraud transactions from the duration 1st Jan 2019 - 31st Dec 2020. It covers credit cards of 1000 customers doing transactions with a pool of 800 merchants.
 
-**1.2 Observation**
+**1.2 Initial Observation**
 
 - The dataset contains 1296675 observation
-- The Data set contains nor null values neither duplicate values
+- The Data set contains no null values neither duplicate values
 - The dataset contains a total of 23 columns out of which we have a single dependent variable labeled is_fraud
 - The is_fraud feature contains two categories 0 and 1, which represent honest and fraud transactions respectively
 
 **1.3 Distribution**
 
-**1.3.1 Distribution of Gender**
+**1.3.1 Distribution of Fraudulent Transaction**
 
-The following diagram shows the distribution of gender where F represents female while M represents male
-![Gender Distribution](Image/Gender_dis.png)
+The following diagram shows the percentage distribution of fraudulent transaction in the dataset and we can observe that the data is imbalanced with only 0.6% of the dataset representing fraud transactions.
+![Percentage of fraud transaction](Image/Dis_ft.png)
 
-**Figure 1.** Distribution of Gender in the Dataset
+**Figure 1.** Percentage Distribution of Fraud Transaction in the Dataset
 
 **1.3.2 Distribution of Gender**
 
-The following diagram shows the distribution of the merchant category in which the credit card transactions in the dataset occurred.
-![Count of Merchant](Image/Merch_count.png)
+The following diagram shows the distribution of gender based on wheather the transaction was fradulent or not where F represents female while M represents male
 
-**Figure 2.** Distribution of Merchant Category in the Dataset
+![Gender Distribution](Image/Gender_dis.png)
 
-**1.3.3 Distribution of Fraudulent Transaction**
+**Figure 2.** Distribution of Gender in the Dataset
 
-The following diagram shows the percentage distribution of fraudulent transaction in the dataset and we can absorb that the data is lopsided with only 0.6%pf the dataset representing fraud transactions and we must make sure t
-![Percentage of fraud transaction](Image/Dis_ft.png)
+## 2 Data Preprocessing and Data Cleaning
 
-**Figure 3.** Percentage Distribution of Fraud Transaction in the Dataset
+**2.1 Data Preprocessing**
+In this phase of the process I acomplish 3 major things listed below: 
+- One hot encoding the "Gender" feature
+- Scaling the "Amount feature using the min-max scaling
+- Dimension reduction by sellecting only features with integer or float data type for model development
+- Reducing multicollinearity by removing independent features with high correlation with other independent features
+  
+**2.1.1 Reducing Multicollinearity**
 
-1. **Data Cleaning**
+The following diagram is a heatmap that shows correlation between all our numerical features: 
+
+![Correlation map](Image/Feature_corr.png)
+
+**Figure 3.** Correlation Heatmap
+
+Following the insight from this heatmap "zip", "merch_lat" and "merch_long" where dropped as features and only 8 features remain i.e "cc_number", "Amount_Scaled","Gender","lat","long","city_pop","unix_time","is_fraud".
+
+**2.2 Data Cleaning**
 
 The subsequent action are taken in the following steps:
 
 - Checking dataset for null and duplicate values
 - Renaming the columns of the dataset
-- Dropping irrelevant columns after which only 11 columns remain which are 'cc_num', 'Amount', 'Gender','zip', 'lat', 'long', 'city_pop', 'unix_time', 'merch_lat', 'merch_long', 'is_fraud'
-- Applying one hot encoding for ‘Gender’
 
-1. **Approach**
+3**Observations from EDA**
+To make insightfull observation I split the dataset into legit and fraud transaction to check for statistical anomalies and discovred that distribution of "Amount" feature in legit and fraud transaction was noticably different as shown in the diagramp below:
+
+![Correlation map](Image/Feature_corr.png)
+
+**Figure 3.** Distribution of Amount in Legit and Fraud Transaction 
+
+- The major thing to notice is that our dataset has a major imbalance in the target feature with only 0.6% data representing fraud transactions while 99.4% represent fraudless transactions.
+- Multicollinearity was present in high levels with features such as 'zip','merch_long','merch_lat'
+- Very little correlation was observed between our dependent feature and independent feature
+- 'Amount' feature had the highest correlation of 0.22 to the target feature 
+- We can notice the distribution of amount between legitimate fraud transaction are quite different
+- The statistical measures between legit and fraud transaction vary significantly
+- The mean value of amount is significantly smaller for legit transaction compared with fraud transaction 
+- The distribution shows that most legit transaction occurs in smaller amounts with the statistical data confirming that around 75% percentile data falls below $82.54
+
+1.5 **Approach**
 
 I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively.
 
