@@ -10,71 +10,73 @@ Fraud detection is a set of activities undertaken to prevent money or property f
 
 Our process will start with Exploratory Data Analysis (EDA) with a goal to gain better insight about our data set and eventually develop a model using machine learning methodology.
 
-## 1. Exploratory Data Analysis
+## 1. Exploratory Data Analysis 🕵🏻
 
 I have obtained the data set and now it is time to perform an Exploratory data Analysis (EDA) to gain insight about the dataset and prepare the data for modeling purposes.
 
-# 1.1 Dataset
+**1.1 Dataset**
 
 **fraudTrain.csv** is a simulated credit card transaction dataset containing legitimate and fraud transactions from the duration 1st Jan 2019 - 31st Dec 2020. It covers credit cards of 1000 customers doing transactions with a pool of 800 merchants.
 
-# 1.2 Initial Observation
+**1.2 Initial Observation**
 
 - The dataset contains 1296675 observation
 - The Data set contains no null values neither duplicate values
 - The dataset contains a total of 23 columns out of which we have a single dependent variable labeled is_fraud
 - The is_fraud feature contains two categories 0 and 1, which represent honest and fraud transactions respectively
 
-# 1.3 Distribution
+**1.3 Distribution**
 
 **1.3.1 Distribution of Fraudulent Transaction**
 
-The following diagram shows the percentage distribution of fraudulent transaction in the dataset and we can observe that the data is imbalanced with only 0.6% of the dataset representing fraud transactions.
+The following diagram shows the percentage distribution of fraudulent transactions in the dataset and we can observe that the data is imbalanced with only 0.6% of the dataset representing fraud transactions.
 
 ![Percentage of fraud transaction](Image/Dis_ft.png)
 
-# Figure 1. Percentage Distribution of Fraud Transaction in the Dataset
+**Figure 1.** Percentage Distribution of Fraud Transaction in the Dataset
 
 **1.3.2 Distribution of Gender**
 
-The following diagram shows the distribution of gender based on wheather the transaction was fradulent or not where F represents female while M represents male
+The following diagram shows the distribution of gender based on whether the transaction was fraudulent or not where F represents female while M represents male.
 
 ![Gender Distribution](Image/Gender_dis.png)
 
-# Figure 2. Distribution of Gender in the Dataset
+**Figure 2.** Distribution of Gender in the Dataset
 
-## 2 Data Preprocessing and Data Cleaning
+## 2. Data Preprocessing and Data Cleaning
 
-# 2.1 Data Preprocessing
-In this phase of the process I acomplish 3 major things listed below: 
+**2.1. Data Preprocessing**
+
+In this phase of the process I accomplish 3 major things listed below: 
 - One hot encoding the "Gender" feature
 - Scaling the "Amount feature using the min-max scaling
-- Dimension reduction by sellecting only features with integer or float data type for model development
+- Dimension reduction by selecting only features with integer or float data type for model development
 - Reducing multicollinearity by removing independent features with high correlation with other independent features
   
-**2.1.1 Reducing Multicollinearity**
+**2.1.1. Reducing Multicollinearity**
 
 The following diagram is a heatmap that shows correlation between all our numerical features: 
 
 ![Correlation map](Image/Feature_corr.png)
 
-<h1 align="center"># Figure 3.** Correlation Heatmap</h1>
+**Figure 3.** Correlation Heatmap
 
 Following the insight from this heatmap "zip", "merch_lat" and "merch_long" where dropped as features and only 8 features remain i.e "cc_number", "Amount_Scaled","Gender","lat","long","city_pop","unix_time","is_fraud".
 
-**2.2 Data Cleaning**
+**2.2. Data Cleaning**
 
 The subsequent action are taken in the following steps:
 
 - Checking dataset for null and duplicate values
 - Renaming the columns of the dataset
 
-## 3 Observations from EDA
-To make insightfull observation I split the dataset into legit and fraud transaction to check for statistical anomalies and discovred that distribution of "Amount" feature in legit and fraud transaction was noticably different as shown in the diagramp below:
+**2.3. Observations from EDA**
+
+To make insightful observation I split the dataset into legit and fraud transaction to check for statistical anomalies and discovered that distribution of "Amount" feature in legit and fraud transaction was noticeably different as shown in the diagram below:
 
 ![Amount Distribution](Image/D_amt.png)
 
-<h1 align="center"># Figure 4. Distribution of Amount in Legit and Fraud Transaction</h1> 
+**Figure 4.** Distribution of Amount in Legit and Fraud Transaction 
 
 - The major thing to notice is that our dataset has a major imbalance in the target feature with only 0.6% data representing fraud transactions while 99.4% represent fraudless transactions.
 - Multicollinearity was present in high levels with features such as 'zip','merch_long','merch_lat'
@@ -85,11 +87,11 @@ To make insightfull observation I split the dataset into legit and fraud transac
 - The mean value of amount is significantly smaller for legit transaction compared with fraud transaction 
 - The distribution shows that most legit transaction occurs in smaller amounts with the statistical data confirming that around 75% percentile data falls below $82.54
 
-## 3 Approach
+## 3. Approach
 
-I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively. In this phase we stratify the data so that there train and the test split have equal proportion of both the class of our dependent variable. We do this to improve the models performance as the data is heavily imbalance. We cannot use techniques for balancing the dataset such as under or over sampling as this is financial data where the nature of the dataset will change significantly with sampling and there will be a large loss of data to balance the dataset with this method. 
+I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively. In this phase we stratify the data so that the train and the test split have equal proportions of both the class of our dependent variable. We do this to improve the models performance as the data is heavily imbalanced. We cannot use techniques for balancing the dataset such as under or over sampling as this is financial data where the nature of the dataset will change significantly with sampling and there will be a large loss of data to balance the dataset with this method. 
 
-**3.1 Machine Learning Approach**
+**3.1. Machine Learning Approach**
 
 In this approach, we use six machine learning algorithms:
 
@@ -100,7 +102,7 @@ In this approach, we use six machine learning algorithms:
 - Pycaret
 - K-Neighbors Classifier
 
-**3.1.1 Decision Tree Model**
+**3.1.1. Decision Tree Model**
 
 **Results & Metrics :** The following diagram shows the confusion matrix and classification report with precision, recall, and F1-score.
 
@@ -130,7 +132,7 @@ Term Explanation
   - F1-score for fraudless transaction: 1.00
   - F1-score for fraud transaction: 0.49
 
-**3.1.2 Random Forest Model**
+**3.1.2. Random Forest Model**
 
 ![Random Forest Class Report](Image/Rf_cls.png)
 
@@ -148,7 +150,7 @@ Class Specific Metrics:
   - F1-score for fraudless transaction: 1.00
   - F1-score for fraud transaction: 0.64
 
-**3.1.3 XgBoost Model**
+**3.1.3. XgBoost Model**
 
 ![XgBoost Class Report](Image/xg_cls.png)
 
@@ -166,7 +168,7 @@ Class Specific Metrics:
   - F1-score for fraudless transaction: 1.0
   - F1-score for fraud transaction: 0.38
   
-  **3.1.4 CatBoost Model**
+**3.1.4. CatBoost Model**
 
 ![CatBoost Class Report](Image/CB_cr.png)
 
@@ -184,7 +186,7 @@ Class Specific Metrics:
   - F1-score for fraudless transaction: 1.0
   - F1-score for fraud transaction: 0.69
   
-**3.1.5 PyCaret for best fit Model**
+**3.1.5. PyCaret for best fit Model**
 
 PyCaret was supposed to help me identify the best fit model by training multiple model and identifying the model that generated the best result but the result was not as intented as the code kept crashing my laptop. However I was able to generate a partial report from which i was able to identify that the K-Neighbors Classification might work best after which i seperately train this model. 
 
@@ -194,7 +196,7 @@ PyCaret was supposed to help me identify the best fit model by training multiple
 
 
   
-**3.1.5 K-Neighbors Classification Model (Best Fit Model)**
+**3.1.5. K-Neighbors Classification Model (Best Fit Model)**
 
 ![KNC Report](Image/cf_mtrx_Knc.png)
 
