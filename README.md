@@ -43,7 +43,7 @@ The following diagram shows the distribution of gender based on whether the tran
 
 **Figure 2.** Distribution of Gender in the Dataset
 
-## 2. Data Preprocessing and Data Cleaning
+## 2. Data Preprocessing and Data Cleaning ⏳
 
 **2.1. Data Preprocessing**
 
@@ -87,7 +87,7 @@ To make insightful observation I split the dataset into legit and fraud transact
 - The mean value of amount is significantly smaller for legit transaction compared with fraud transaction 
 - The distribution shows that most legit transaction occurs in smaller amounts with the statistical data confirming that around 75% percentile data falls below $82.54
 
-## 3. Approach
+## 3. Approach 🤖
 
 I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively. In this phase we stratify the data so that the train and the test split have equal proportions of both the class of our dependent variable. We do this to improve the models performance as the data is heavily imbalanced. We cannot use techniques for balancing the dataset such as under or over sampling as this is financial data where the nature of the dataset will change significantly with sampling and there will be a large loss of data to balance the dataset with this method. 
 
