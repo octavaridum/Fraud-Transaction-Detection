@@ -30,6 +30,7 @@ I have obtained the data set and now it is time to perform an Exploratory data A
 **1.3.1 Distribution of Fraudulent Transaction**
 
 The following diagram shows the percentage distribution of fraudulent transaction in the dataset and we can observe that the data is imbalanced with only 0.6% of the dataset representing fraud transactions.
+
 ![Percentage of fraud transaction](Image/Dis_ft.png)
 
 **Figure 1.** Percentage Distribution of Fraud Transaction in the Dataset
@@ -68,12 +69,12 @@ The subsequent action are taken in the following steps:
 - Checking dataset for null and duplicate values
 - Renaming the columns of the dataset
 
-3**Observations from EDA**
+## 3 Observations from EDA
 To make insightfull observation I split the dataset into legit and fraud transaction to check for statistical anomalies and discovred that distribution of "Amount" feature in legit and fraud transaction was noticably different as shown in the diagramp below:
 
-![Correlation map](Image/Feature_corr.png)
+![Amount Distribution](Image/D_amt.png)
 
-**Figure 3.** Distribution of Amount in Legit and Fraud Transaction 
+**Figure 4.** Distribution of Amount in Legit and Fraud Transaction 
 
 - The major thing to notice is that our dataset has a major imbalance in the target feature with only 0.6% data representing fraud transactions while 99.4% represent fraudless transactions.
 - Multicollinearity was present in high levels with features such as 'zip','merch_long','merch_lat'
@@ -84,17 +85,20 @@ To make insightfull observation I split the dataset into legit and fraud transac
 - The mean value of amount is significantly smaller for legit transaction compared with fraud transaction 
 - The distribution shows that most legit transaction occurs in smaller amounts with the statistical data confirming that around 75% percentile data falls below $82.54
 
-1.5 **Approach**
+## 3 Approach
 
-I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively.
+I prepare the data from the EDA for machine learning model development by creating a train and test split by 70% and 30% respectively. In this phase we stratify the data so that there train and the test split have equal proportion of both the class of our dependent variable. We do this to improve the models performance as the data is heavily imbalance. We cannot use techniques for balancing the dataset such as under or over sampling as this is financial data where the nature of the dataset will change significantly with sampling and there will be a large loss of data to balance the dataset with this method. 
 
 **3.1 Machine Learning Approach**
 
-In this approach, we use three machine learning algorithms:
+In this approach, we use six machine learning algorithms:
 
 - Decision Tree Model
 - Random Forest Model
 - Xgboost Model
+- CatBoosting Model
+- Pycaret
+- K-Neighbors Classifier
 
 **3.1.1 Decision Tree Model**
 
@@ -103,7 +107,7 @@ In this approach, we use three machine learning algorithms:
 ![Decision Tree Class Report](Image/DT_cr.png)
 ![Decision Tree Confusion Matrix](Image/cf_mtrx.png)
 
-**Figure 4.** Classification Report for Decision Tree
+**Figure 5.** Classification Report for Decision Tree
 
 **Metrics Explained**
 
@@ -116,51 +120,96 @@ Term Explanation
 
 **Overall Performance:**
 
-- **Accuracy**: 0.99(how often the model makes correct predictions)
 - **Precision**: How many of the model’s transaction predictions were actually correct.
-  - Precision for fraudless transaction prediction: 1 (out of 386505 fraudless transactions predictions, 99.67% were correctly classified as fraudless transaction)
-  - Precision for Fraud transaction prediction: 0.40 (out of 2498 fraud transactions predictions, 40% were correctly classified as fraud transaction)
+  - Precision for fraudless transaction prediction: 1 (out of 386550 fraudless transactions predictions, 99.71% were correctly classified as fraudless transaction)
+  - Precision for Fraud transaction prediction: 0.47 (out of 2453 fraud transactions predictions, 47% were correctly classified as fraud transaction)
 - **Recall**: How many of the actual transactions did the model classify correctly.
-  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted 99.61% correctly)
-  - Recall for fraud transaction : 0.45 (out of 2239 actual fraud transaction cases, the model predicted 45% correctly)
+  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted 99.66% correctly)
+  - Recall for fraud transaction : 0.51 (out of 2252 actual fraud transaction cases, the model predicted 51% correctly)
 - **F1-Score:** Harmonic mean between precision and recall
-  - F1-score for fraudless transaction: 0.9963
-  - F1-score for fraud transaction: 0.42
+  - F1-score for fraudless transaction: 1.00
+  - F1-score for fraud transaction: 0.49
 
 **3.1.2 Random Forest Model**
 
 ![Random Forest Class Report](Image/Rf_cls.png)
 
-**Figure 5.** Classification Report for Random Forest Model
+**Figure 6.** Classification Report for Random Forest Model
 
 Class Specific Metrics:
 
-- **Accuracy**: 0.99629(how often the model makes correct predictions)
 - **Precision**: How many of the model’s transaction predictions were actually correct.
-  - Precision for fraudless transaction prediction: 1 (out of 387726 fraudless transactions predictions, 99.69% were correctly classified as fraudless transaction)
-  - Precision for Fraud transaction prediction: 0.81 (out of 1277 fraud transactions predictions, 81% were correctly classified as fraud transaction)
+  - Precision for fraudless transaction prediction: 1 (out of 387628 fraudless transactions predictions, close to 100% were correctly classified as fraudless transaction)
+  - Precision for Fraud transaction prediction: 0.84 (out of 1375 fraud transactions predictions, 81% were correctly classified as fraud transaction)
 - **Recall**: How many of the actual transactions did the model classify correctly.
-  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted 99.69% correctly)
-  - Recall for fraud transaction : 0.46 (out of 2239 actual fraud transaction cases, the model predicted 46% correctly)
+  - Recall for fraudless transaction: 1 (out of 386751 actual fraudless transaction cases, the model predicted close to 100% correctly)
+  - Recall for fraud transaction : 0.51 (out of 2252 actual fraud transaction cases, the model predicted 51% correctly)
 - **F1-Score:** Harmonic mean between precision and recall
-  - F1-score for fraudless transaction: 0.9963
-  - F1-score for fraud transaction: 0.59
+  - F1-score for fraudless transaction: 1.00
+  - F1-score for fraud transaction: 0.64
 
-**3.1.3 xgboost Model**
+**3.1.3 XgBoost Model**
 
-![Random Forest Class Report](Image/xg_cls.png)
+![XgBoost Class Report](Image/xg_cls.png)
 
-**Figure 6.** Classification Report for xgboost Model
+**Figure 7.** Classification Report for xgboost Model
 
 Class Specific Metrics:
 
-- **Accuracy**: 0.99(how often the model makes correct predictions)
 - **Precision**: How many of the model’s transaction predictions were actually correct.
-  - Precision for fraudless transaction prediction: 1 (out of 387726 fraudless transactions predictions, 99.69% were correctly classified as fraudless transaction)
-  - Precision for Fraud transaction prediction: 0.65 (out of 1277 fraud transactions predictions, 65% were correctly classified as fraud transaction)
+  - Precision for fraudless transaction prediction: 1 (out of 388089 fraudless transactions predictions, close to 100% were correctly classified as fraudless transaction)
+  - Precision for Fraud transaction prediction: 0.65 (out of 914 fraud transactions predictions, 65% were correctly classified as fraud transaction)
 - **Recall**: How many of the actual transactions did the model classify correctly.
-  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted 99.93% correctly)
-  - Recall for fraud transaction : 0.45 (out of 2239 actual fraud transaction cases, the model predicted 26% correctly)
+  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted close to 100% correctly)
+  - Recall for fraud transaction : 0.26 (out of 2239 actual fraud transaction cases, the model predicted 26% correctly)
 - **F1-Score:** Harmonic mean between precision and recall
-  - F1-score for fraudless transaction: 0.9963
-  - F1-score for fraud transaction: 0.37
+  - F1-score for fraudless transaction: 1.0
+  - F1-score for fraud transaction: 0.38
+  
+  **3.1.4 CatBoost Model**
+
+![CatBoost Class Report](Image/CB_cr.png)
+
+**Figure 8.** Classification Report for CatBoost Model
+
+Class Specific Metrics:
+
+- **Precision**: How many of the model’s transaction predictions were actually correct.
+  - Precision for fraudless transaction prediction: 1 (out of 387618 fraudless transactions predictions, close to 100% were correctly classified as fraudless transaction)
+  - Precision for Fraud transaction prediction: 0.90 (out of 1385 fraud transactions predictions, 90% were correctly classified as fraud transaction)
+- **Recall**: How many of the actual transactions did the model classify correctly.
+  - Recall for fraudless transaction: 1 (out of 386764 actual fraudless transaction cases, the model predicted close to 100% correctly)
+  - Recall for fraud transaction : 0.56 (out of 2239 actual fraud transaction cases, the model predicted 56% correctly)
+- **F1-Score:** Harmonic mean between precision and recall
+  - F1-score for fraudless transaction: 1.0
+  - F1-score for fraud transaction: 0.69
+  
+**3.1.5 PyCaret for best fit Model**
+
+PyCaret was supposed to help me identify the best fit model by training multiple model and identifying the model that generated the best result but the result was not as intented as the code kept crashing my laptop. However I was able to generate a partial report from which i was able to identify that the K-Neighbors Classification might work best after which i seperately train this model. 
+
+![PyCaret Class Report](Image/Pycrt_fail.png)
+
+**Figure 9.** PyCaret Best Fit Model Crash
+
+
+  
+**3.1.5 K-Neighbors Classification Model (Best Fit Model)**
+
+![KNC Report](Image/cf_mtrx_Knc.png)
+
+![KNC Report](Image/KNC_cr.png)
+
+**Figure 10.** Classification Report for K-Neighbors Classification Model
+
+Class Specific Metrics:
+
+- **Precision**: How many of the model’s transaction predictions were actually correct.
+  - Precision for fraudless transaction prediction: 1 (out of 386439 fraudless transactions predictions, close to 100% were correctly classified as fraudless transaction)
+  - Precision for Fraud transaction prediction: 0.78 (out of 2564 fraud transactions predictions, 78% were correctly classified as fraud transaction)
+- **Recall**: How many of the actual transactions did the model classify correctly.
+  - Recall for fraudless transaction: 1 (out of 386751 actual fraudless transaction cases, the model predicted close to 100% correctly)
+  - Recall for fraud transaction : 0.89 (out of 2252 actual fraud transaction cases, the model predicted 89% correctly)
+- **F1-Score:** Harmonic mean between precision and recall
+  - F1-score for fraudless transaction: 1.0
+  - F1-score for fraud transaction: 0.83
